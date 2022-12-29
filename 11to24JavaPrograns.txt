@@ -1,0 +1,403 @@
+11.
+import java.util.*;
+class AuthenticationException extends Exception 
+{
+ 
+    public AuthenticationException(String msg) 
+    {
+        System.out.println(msg);
+    }
+}
+class Main
+{
+
+ public static void main(String[] args)
+ {
+  String psd;
+  Scanner sc=new Scanner(System.in);
+  try 
+  {
+     System.out.print("Enter password :: ");
+     psd=sc.nextLine();
+   
+     if(!psd.equals("123")) 
+     {
+        throw new AuthenticationException("Incorrect password\nType correct password");
+     }
+     else
+     {
+        System.out.println("Welcome User !!!");
+     }
+   
+  } 
+  catch (AuthenticationException e) 
+  {
+        System.out.println(e);
+  }
+  
+}
+}
+
+12.
+
+import java.util.*;
+class AgeException extends Exception 
+{
+ 
+    public AgeException(String msg) 
+    {
+        System.out.println(msg);
+    }
+}
+class Main
+{
+
+ public static void main(String[] args)
+ {
+  int age;
+  Scanner sc=new Scanner(System.in);
+  try 
+  {
+     System.out.print("Enter Age :: ");
+     age=sc.nextInt();
+     if(age<18) 
+     {
+        throw new AgeException("Age should be Greater than 18.\tPlease Re-enter!!!");
+     }
+     else
+     {
+        System.out.println("Welcome to Voting");
+     }
+   
+  } 
+  catch (AgeException e) 
+  {
+        System.out.println(e);
+  }
+  
+}
+}
+
+13.
+
+import java.util.*;
+class Student
+{
+    String name;
+    int roll_no;
+    int sub1,sub2;
+    void getData()
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter Name:");
+        name=sc.nextLine();
+        System.out.println("Enter RollNo.:");
+        roll_no=sc.nextInt();
+        System.out.println ("Enter marks out of 100 of 1st Subject");
+        sub1=sc.nextInt();
+        System.out.println ("Enter marks out of 100 of 2nd Subject");
+        sub2=sc.nextInt();
+    }
+    void displayData()
+    {
+        int total = sub1+sub2;
+        float per = (total * 100) / 200;
+        System.out.println ("*****************************");
+        System.out.println ("\nName :"+name);
+        System.out.println ("\nRoll No. :"+roll_no);
+        System.out.println ("\nMarks of 1st Subject :"+sub1);
+        System.out.println ("\nMarks of 2nd Subject :"+sub2);
+        System.out.println ("\nTotal Marks :"+total);
+        System.out.println ("\nPercentage :"+per+"%");
+         System.out.println ("*****************************");
+    }
+}
+class Main
+{
+   public static void main(String[]agrs)
+   {
+       Student s=new Student();
+       s.getData();
+       s.displayData();
+   }
+}
+
+14.
+
+import java.util.*;
+class Main{
+    public static void main(String[] args)
+    {
+        ArrayList<Integer>obj= new ArrayList<Integer>();
+        obj.add(10);
+        obj.add(5);
+        obj.add(4);
+        obj.add(7);
+        obj.add(54);
+        obj.add(3,34);
+        System.out.println("array elements: "+obj);
+        obj.remove(3);
+        System.out.println("removing index 3 element: "+(obj.remove(3)));
+        obj.size();
+        System.out.println("size of the array: "+(obj.size()));
+    }
+}
+
+16.
+
+import java.util.*;
+class Employee
+{
+  int empId;
+  String name;
+  int salary;
+  int exp;
+  void getData()
+  {
+      Scanner sc=new Scanner(System.in);
+      System.out.println("Enter Employee Name:");
+      name=sc.nextLine();
+      System.out.println("Enter Employee ID:");
+      empId=sc.nextInt();
+      System.out.println("Enter Employee Salary:");
+      salary=sc.nextInt();
+      System.out.println("Enter Employee Experience:");
+      exp=sc.nextInt();
+      
+  }
+  void displayData()
+  {
+       System.out.println("Employee Name is:"+name);
+      System.out.println("Employee ID is:"+empId);
+       System.out.println("Employee Salary is:"+salary);
+        System.out.println("Employee Experience is:"+exp);
+  }
+}
+class Main
+{
+    public static void main(String []args)
+    {
+        Employee e[]=new Employee[3];
+        
+        for(int i=0;i<3;i++)
+        {
+            e[i]=new Employee();
+            e[i].getData();
+        }
+        System.out.println("***Data of Employee***");
+        for(int i=0;i<3;i++)
+        {
+            e[i].displayData();
+            System.out.println("*******************");
+        }
+    }
+}
+
+17.
+
+import java.util.*;
+class Student
+{
+  String name;
+  int s1,s2,s3;
+  int avg;
+  
+Student()
+{
+      Scanner sc=new Scanner(System.in);
+      System.out.println("Student Name:");
+      name=sc.nextLine();
+      System.out.println("Subject 1:");
+      s1=sc.nextInt();
+      System.out.println("Subject 2:");
+      s2=sc.nextInt();
+      System.out.println("Subject 3:");
+      s3=sc.nextInt();
+      avg=(s1+s2+s3)/3;
+      
+  }
+  void printDetails()
+  {
+       System.out.println("Student Name is:"+name);
+      System.out.println("Subject 1 Mark is:"+s1);
+       System.out.println("Subject 2 Mark is:"+s2);
+        System.out.println("Subject 3 Mark is:"+s3);
+         System.out.println("Average of 3 Marks are:"+avg);
+  }
+}
+class Main
+{
+    public static void main(String []args)
+    {
+        Student s[]=new Student[3];
+        
+        for(int i=0;i<3;i++)
+        {
+            s[i]=new Student();
+            
+        }
+        System.out.println("***Data of students***");
+        for(int i=0;i<3;i++)
+        {
+            s[i].printDetails();
+            System.out.println("*******************");
+        }
+    }
+}
+
+20.
+
+class Calculator
+{   
+    void add(int a,int b)
+    {
+        int result;
+        result=a+b;
+        System.out.println("Addition of Integers is: "+result);
+    }
+    void add(float a,float b)
+    {
+        float result;
+        result=a+b;
+        System.out.println("Addition of Floats is: "+result);
+    }
+    void add(double a, double b)
+    {
+        double result;
+        result=a+b;
+        System.out.println("Addition of Doubles is: "+result);
+    }
+}
+class Main
+{
+    public static void main(String[] args) 
+    {
+        Calculator c=new Calculator();
+        c.add(2,4);
+        c.add(2.4,3.5);
+        c.add(34.5,45.6);
+    }
+}
+
+22.
+
+abstract class Student
+{
+    abstract void getName(String name);
+    abstract void getMarks(float sscmark,float hscmark);
+   
+}
+class Harish extends Student
+{
+    public void getName(String name)
+    {
+       System.out.println("Name is:"+name);
+    }
+    public void getMarks(float sscmark,float hscmark)
+    {
+        System.out.println("SSC Marks is:"+sscmark);
+        System.out.println("HSC Marks is:"+hscmark);
+    }
+}
+class Jayant extends Student
+{
+    public void getName(String name)
+    {
+       System.out.println("Name is:"+name);
+    }
+    public void getMarks(float sscmark,float hscmark)
+    {
+        System.out.println("SSC Marks is:"+sscmark);
+        System.out.println("HSC Marks is:"+hscmark);
+    }
+}
+class Vijay extends Student
+{
+    public void getName(String name)
+    {
+       System.out.println("Name is:"+name);
+    }
+    public void getMarks(float sscmark,float hscmark)
+    {
+        System.out.println("SSC Marks is:"+sscmark);
+        System.out.println("HSC Marks is:"+hscmark);
+    }
+}
+class Main
+{
+    public static void main(String[] args)
+    {
+        Harish h=new Harish();
+        h.getName("Harish");
+        h.getMarks(45,54);
+        Jayant j=new Jayant();
+        j.getName("Jayant");
+        j.getMarks(67,76);
+        Vijay v=new Vijay();
+        v.getName("Vijay");
+        v.getMarks(89,98);
+        
+    }
+}
+
+23.
+
+import java.util.*;
+class Animal
+{
+    private String food;
+    private int legs;
+    private String foodtype;
+    public String skinColor="White";
+    public void setFood(String fd)
+    {
+        food=fd;
+    }
+    public String getFood()
+    {
+        return food;
+    }
+    public void setLegs(int lg)
+    {
+        legs=lg;
+    }
+    public int getLegs()
+    {
+        return legs;
+    }
+    public void setFoodType(String fdt)
+    {
+        foodtype=fdt;
+    }
+    public String getFoodType()
+    {
+        return foodtype;
+    }
+}
+class Cat extends Animal
+{
+    String skinColor;
+    String getSkinColor()
+    {
+        return super.skinColor;
+    }
+}
+class Main 
+{
+    public static void main(String[] args)
+    {
+       Scanner get=new Scanner(System.in);
+       Cat mau=new Cat();
+       mau.setFood("Milk");
+       System.out.println("Food:"+mau.getFood());
+       mau.setLegs(4);
+        System.out.println("No.legs: "+mau.getLegs());
+       mau.setFoodType("Veg");
+        System.out.println("Food Type:"
+       +mau.getFoodType());
+       
+       System.out.println("Skin Color:"
+       +mau.getSkinColor());
+       
+    }
+}
