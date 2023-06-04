@@ -1,0 +1,35 @@
+create database cursors;
+use cursors;
+show tables;
+create table t1(id int, data int);
+create table t2(i int);
+create table t3(i1 int, i2 int);
+delimiter //
+create procedure curdemo1()
+begin
+declare done int default False;
+declare a char(16);
+declare b, c int;
+declare cur1 cursor for select id,data from test.t1;
+declare cur2 cursor for select i from test.t2;
+open cur1;
+open cur2;
+read_loop: LOOP
+fetch cur1 into a,b;
+fetch cur2 into c;
+if b<c then
+insert into test.t3 values(a,b);
+else
+insert into test.t3 values(a,c);
+end if;
+end LOOP;
+close cur1;
+close cur2;
+end; //
+insert into t1 values(12,23);
+insert into t1 values(26,2);
+insert into t2 values(22);
+insert into t2 values(72);
+select *from t1;
+select *from t2;
+select *from t3;

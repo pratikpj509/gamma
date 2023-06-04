@@ -1,0 +1,43 @@
+create database yash;
+use yash;
+create table student(roll_no int, s_name varchar(30), address varchar(30), age int); //create a table 1
+insert into student(roll_no, s_name, address, age) values(1,"harsh", "delhi",17);
+insert into student(roll_no, s_name, address, age) values(2,"rohit", "pune",18);
+insert into student(roll_no, s_name, address, age) values(3,"anuj", "nanded",19);
+insert into student(roll_no, s_name, address, age) values(4,"mohit", "latur",20);
+insert into student(roll_no, s_name, address, age) values(5,"kalyani", "bhopal",15);
+insert into student(roll_no, s_name, address, age) values(6,"sanju", "indore",16);
+insert into student(roll_no, s_name, address, age) values(7,"manoj", "surat",14);
+insert into student(roll_no, s_name, address, age) values(8,"vihaaan", "mumbai",22); // inserting the data 
+select *from student; //display the table 1
+create table student_cou(r_no int, course_id int); //create a table 2
+insert into student_cou(r_no, course_id) values(1, 1);
+insert into student_cou(r_no, course_id) values(2, 2);
+insert into student_cou(r_no, course_id) values(3, 2);
+insert into student_cou(r_no, course_id) values(4, 3);
+insert into student_cou(r_no, course_id) values(5, 1);
+insert into student_cou(r_no, course_id) values(9, 4);
+insert into student_cou(r_no, course_id) values(10, 5); //inserting the data
+select *from student_cou; //display the table 2
+-- inner join
+select distinct student.roll_no, student.s_name, student.address, student.age, student_cou.course_id
+from student
+inner join student_cou
+on student.roll_no=student_cou.r_no;
+-- left join
+select distinct student.roll_no, student.s_name, student_cou.course_id
+from student
+left join student_cou
+on student.roll_no=student_cou.r_no;
+-- right join
+select distinct student.roll_no, student.s_name, student.address, student_cou.course_id
+from student
+right join student_cou
+on student.roll_no=student_cou.r_no;
+-- view
+create view student_view AS
+select roll_no, s_name
+from student
+where roll_no<=5;
+select *from student_view;
+drop view student_view;

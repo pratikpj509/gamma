@@ -1,0 +1,26 @@
+create database company1;
+use company1;
+create table employee(
+ emp_id int, 
+ emp_name varchar(30),
+ email varchar(40),
+ phone int,
+ salary int,
+ dep_id int,
+ user_name varchar(30),
+ job_title varchar(40)
+);
+select *from employee;
+
+alter table employee add constraint primary key(emp_id);
+alter table employee modify emp_name varchar(30)not null;
+alter table employee add constraint chksalary check(salary>0);
+
+create table department(dep_id int,dep_name varchar(30));
+alter table department add constraint primary key(dep_id);
+
+create table login(user_name varchar(30), password varchar(20));
+alter table login add constraint primary key(user_name);
+
+create table post(job_title varchar(40), job_desc varchar(30));
+alter table post add constraint primary key(job_title);

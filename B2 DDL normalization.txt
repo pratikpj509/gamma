@@ -1,0 +1,16 @@
+create database stu_details;
+use stu_details;
+create table student_d(stu_rollno int, stu_name varchar(20), stu_address varchar(30), stu_age 
+int,stu_department varchar(30));
+insert into student_d values(1, "aditya", "delhi", 18, "computer");
+insert into student_d values(2, "aditya", "mumbai", 19, "IT");
+insert into student_d values(3, "aditya", "pune", 21, "computer");
+insert into student_d values(4, "aditya", "surat", 20, "IT");
+
+select *from student_d;
+
+alter table student_d add column stu_email varchar(40);
+
+alter table student_d rename column stu_name to s_name;
+
+truncate table student_d;

@@ -1,0 +1,33 @@
+create database bases;
+use bases;
+create table students(stu_id int primary key, stu_name varchar(20),stu_salary int); //create a table 
+desc students;
+INSERT INTO students(stu_id, stu_name ,stu_salary) values(2,"yash",2000);
+INSERT INTO students(stu_id, stu_name ,stu_salary) values(3,"rachita",4000);
+INSERT INTO students(stu_id, stu_name ,stu_salary) values(4,"sakshi",6000); // inserting the data 
+select *from students; // display the table and the data present in the table 
+
+update students set stu_name='omkar' where stu_id=2;
+delete from students where stu_id=2 and stu_name='yash';
+select *from students;
+select stu_salary+100 as stu_update_salary from students;
+select *from students where stu_name='rachita'and stu_id=3;
+select *from students;
+-- Relational Operators
+select *from students where stu_id<3;
+select *from students where stu_id>4;
+select *from students where stu_id=4;
+select *from students where stu_id!=4;
+select *from students where stu_id<=3;
+select *from students where stu_id>=4;
+-- Arithmetic Operators
+select stu_salary+20000 as Total_salary from students;-- addition
+select stu_salary-200 as Net_salary from students;-- substraction
+select stu_salary*2000 as Main_salary from students;-- multiplication
+select stu_salary/20 as peoduct_salary from students;-- division
+-- logical Operators
+select *from students where stu_id=4 and stu_name="sakshi";-- ADD Operator
+select *from students where stu_salary between 2000 and 4000;-- Between Operator
+select *from students where stu_id=2 or stu_name="rachita";-- OR Operator
+select *from students where stu_salary in ("2000","6000");-- IN Operator
+select *from students where stu_id like "2%";-- Like Operator

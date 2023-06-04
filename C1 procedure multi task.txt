@@ -1,0 +1,14 @@
+create database procedures;
+use procedures;
+Delimiter $$
+create procedure Multiplication (
+in x int, //input 1
+in y int, //input 2
+out result int //result
+)
+begin
+set result = x*y; //doing multiplication
+end $$
+Delimiter ;
+call Multiplication (10,6, @result); //call function for result
+select @result;
