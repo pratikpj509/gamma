@@ -1,0 +1,80 @@
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <stdio.h>
+
+#define MAX_BUFFER 1024
+
+int main() {
+  int firstPipeRead, secondPipeWrite, writeResult;
+  const char *senderFIFO = "senderFIFO"; // First FIFO name
+  char receivedData[MAX_BUFFER], userInput[MAX_BUFFER]; // Data buffers
+  int wordCount = 1, charCount = 0, i = 0, lineCount = 1;
+
+  FILE *outputFile;
+  const char *receiverFIFO = "receiverFIFO"; // Second FIFO name
+
+  /* Create the FIFOs (named pipes) */
+  mkfifo(senderFIFO, 0666); // Create the first FIFO with read and write permissions
+  mkfifo(receiverFIFO, 0666); // Create the second FIFO with read and write permissions
+
+  /* Open, read, and display the message from the FIFO */
+  firstPipeRead = open(senderFIFO, O_RDWR); // Open the first FIFO for reading and writing
+
+  printf("\n\nEnter a sentence ending with 0:\n");
+
+  while ((userInput[i] = getchar()) != '0') {
+    i++;
+  }
+  userInput[i] = '\0';
+
+  write(firstPipeRead, userInput, sizeof(userInput)); // Write the user-entered sentence to the first FIFO
+
+  i = 0;
+
+  read(firstPipeRead, receivedData, MAX_BUFFER); // Read the response from the second process
+
+  printf("\nReceived Message: %s \n", receivedData);
+
+  while (receivedData[i] != '\0') {
+    if (receivedData[i] == ' ' || receivedData[i] == '\n') {
+      wordCount++; // Count words when space or newline is encountered
+      if (receivedData[i] == '\n') {
+        lineCount++; // Count lines when a newline is encountered
+      }
+    } else {
+      charCount++; // Count characters
+    }
+    i++;
+  }
+
+  printf("\nTotal characters = %d\n", charCount);
+  printf("\nTotal words = %d\n", wordCount);
+  printf("\nTotal lines = %d\n", lineCount);
+
+  outputFile = fopen("output.txt", "w+"); // Open a text file for writing and reading
+  if (outputFile != NULL) {
+    fprintf(outputFile, "\nTotal characters = %d\n", charCount); // Write character count to the file
+    fprintf(outputFile, "\nTotal words = %d\n", wordCount); // Write word count to the file
+    fprintf(outputFile, "\nTotal lines = %d\n", lineCount); // Write line count to the file
+    fclose(outputFile); // Close the file
+  } else {
+    printf("Error opening 'output.txt' for writing.\n");
+  }
+
+  close(firstPipeRead); // Close the first FIFO
+
+  secondPipeWrite = open(receiverFIFO, O_RDWR); // Open the second FIFO for reading and writing
+  writeResult = write(secondPipeWrite, &charCount, sizeof(charCount)); // Write character count to the second FIFO
+  writeResult = write(secondPipeWrite, &wordCount, sizeof(wordCount)); // Write word count to the second FIFO
+  writeResult = write(secondPipeWrite, &lineCount, sizeof(lineCount)); // Write line count to the second FIFO
+  if (writeResult == -1) {
+    printf("\nError writing in the second pipe..!\n");
+    return 1;
+  } else {
+    printf("\nSuccessful writing in the second pipe..!\n");
+  }
+  close(secondPipeWrite); // Close the second FIFO
+
+  return 0; // Return 0 to indicate successful execution
+}
